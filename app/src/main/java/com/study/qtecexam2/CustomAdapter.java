@@ -35,7 +35,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         holder.tv_num.setText(String.valueOf(arrayList.get(position).getNum1()));
-        holder.tv_str.setText(String.valueOf(arrayList.get(position).getStr1()));
+        holder.tv_str.setText(arrayList.get(position).getStr1());
     }
 
     @Override
