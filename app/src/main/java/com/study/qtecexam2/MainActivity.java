@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                         a = 5; b = "5";
                     }
 
-                    tv_label.setText("메뉴" + String.valueOf(INDEX+1));
+                    tv_label.setText("메 뉴" + String.valueOf(INDEX+1));
                     item test = new item(a,b);
                     arrayList.add(test);
                     adapter.notifyDataSetChanged();
