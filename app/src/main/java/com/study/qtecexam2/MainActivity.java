@@ -18,7 +18,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
     RecyclerView recyclerView;
     CustomAdapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -32,17 +31,14 @@ public class MainActivity extends AppCompatActivity {
     String s_beans = "원두";
     String s_water = "물";
     String s_milk = "우유";
-
-    //초기 재료 수
+    //초기 재료 수량
     int i_beans = 10000;
     int i_water = 10000;
     int i_milk = 5000;
-
     //음료 가격
     int i_espresso_cost = 4000;
     int i_latte_cost = 5000;
     int i_americano_cost = 4500;
-
     //음료 주문 수
     int i_espresso_cnt = 0;
     int i_latte_cnt = 0;
@@ -59,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         //액션바 제거
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-
         onInit();
     }
 
@@ -78,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        DecimalFormat myFormatter = new DecimalFormat("###,###");
 
         for (int i = 0; i < button.length; i++) {
             final int INDEX;
@@ -87,9 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     arrayList.clear();
-
-                    DecimalFormat myFormatter = new DecimalFormat("###,###");
-
 
                     if (INDEX == 0) {
                         cafe = new item(s_beans + " : ", String.valueOf(myFormatter.format(i_beans))+" g");
@@ -145,8 +137,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         s_label_text = "아메리카노 주문 완료";
                     }
-                    //리스트 초기화
-
                     if(INDEX == 2 || INDEX == 3 || INDEX == 4){
                         cafe = new item("잔여 원두 : " , String.valueOf(myFormatter.format(i_beans))+" g");
                         arrayList.add(cafe);
