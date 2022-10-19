@@ -4,7 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,8 +36,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
-        holder.tv_num.setText(String.valueOf(arrayList.get(position).getNum1()));
         holder.tv_str.setText(arrayList.get(position).getStr1());
+        holder.tv_str2.setText(arrayList.get(position).getStr2());
+
     }
 
     @Override
@@ -47,13 +50,23 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     }
 
     public class CustomViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_num;
+        LinearLayout lay_item;
         TextView tv_str;
+        TextView tv_str2;
 
         public CustomViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tv_num = itemView.findViewById(R.id.tv_num);
+            this.lay_item = itemView.findViewById(R.id.lay_item);
             this.tv_str = itemView.findViewById(R.id.tv_str);
+            this.tv_str2 = itemView.findViewById(R.id.tv_str2);
+
+            lay_item.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Toast.makeText(view.getContext(), "메뉴" + tv_str.getText() + " 클릭!", Toast.LENGTH_SHORT).show();
+
+                }
+            });
         }
     }
 
