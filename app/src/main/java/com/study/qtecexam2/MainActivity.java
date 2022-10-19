@@ -84,13 +84,7 @@ public class MainActivity extends AppCompatActivity {
                     arrayList.clear();
 
                     if (INDEX == 0) {
-                        cafe = new item(s_beans + " : ", String.valueOf(myFormatter.format(i_beans))+" g");
-                        arrayList.add(cafe);
-                        cafe = new item(s_water + " : ", String.valueOf(myFormatter.format(i_water))+" ml");
-                        arrayList.add(cafe);
-                        cafe = new item(s_milk + " : ", String.valueOf(myFormatter.format(i_milk))+" ml");
-                        arrayList.add(cafe);
-                        s_label_text = "재료 잔고";
+                        s_label_text = "재료보고";
                     } else if (INDEX == 1) {
                         cafe = new item("총 수익금 : ", String.valueOf(myFormatter.format(i_today_cost_sum))+" 원");
                         arrayList.add(cafe);
@@ -100,44 +94,40 @@ public class MainActivity extends AppCompatActivity {
                         arrayList.add(cafe);
                         cafe = new item("아메리카노(총 " + i_americano_cnt + "잔) : ", String.valueOf(myFormatter.format(i_americano_cnt * i_americano_cost))+" 원");
                         arrayList.add(cafe);
-                        s_label_text = "통계 리스트";
+                        s_label_text = "정산보고";
                     } else if (INDEX == 2) {
                         if(i_beans >= 100 && i_water >= 30){
                             i_beans -= 100;
                             i_water -= 30;
-
                             i_today_cost_sum += i_espresso_cost;
                             i_espresso_cnt += 1;
-
+                            s_label_text = "에스프레소 주문 완료";
                         }else{
-                            onDialog();
+                            onDialog(s_beans);
                         }
-                        s_label_text = "에스프레소 주문 완료";
                     } else if (INDEX == 3) {
                         if(i_beans >= 100 && i_water >= 70 && i_milk >= 30){
                             i_beans -= 100;
                             i_water -= 70;
                             i_milk -= 30;
-
                             i_today_cost_sum += i_latte_cost;
                             i_latte_cnt += 1;
+                            s_label_text = "라떼 주문 완료";
                         }else{
-                            onDialog();
+                            onDialog(s_beans);
                         }
-                        s_label_text = "라떼 주문 완료";
                     } else if (INDEX == 4) {
                         if(i_beans >= 100 && i_water >= 100){
                             i_beans -= 100;
                             i_water -= 100;
-
                             i_today_cost_sum += i_americano_cost;
                             i_americano_cnt += 1;
+                            s_label_text = "아메리카노 주문 완료";
                         }else{
-                            onDialog();
+                            onDialog(s_beans);
                         }
-                        s_label_text = "아메리카노 주문 완료";
                     }
-                    if(INDEX == 2 || INDEX == 3 || INDEX == 4){
+                    if(INDEX == 0 || INDEX == 2 || INDEX == 3 || INDEX == 4){
                         cafe = new item("잔여 원두 : " , String.valueOf(myFormatter.format(i_beans))+" g");
                         arrayList.add(cafe);
                         cafe = new item("잔여 물 : ", String.valueOf(myFormatter.format(i_water))+" ml");
@@ -145,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
                         cafe = new item("잔여 우유 : ", String.valueOf(myFormatter.format(i_milk))+" ml");
                         arrayList.add(cafe);
                     }
-
                     tv_label.setText(s_label_text);
                     adapter.notifyDataSetChanged();
                     //recyclerView.scrollToPosition(adapter.getItemCount()-1);
@@ -154,10 +143,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void onDialog(){
+    public void onDialog(String material){
+        s_label_text = "재고없음";
+
         AlertDialog.Builder msgBuilder = new AlertDialog.Builder(MainActivity.this)
                 .setTitle("재료 없음")
-                .setMessage("재료가 없습니다. 확인해주세요.")
+                .setMessage(material + "가 부족합니다. 재고를 확인해주세요.")
                 .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -21,7 +21,7 @@
             android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_blue1"
-            android:text="재료 잔고"
+            android:text="재료보고"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -32,7 +32,7 @@
             android:layout_marginLeft="15dp"
             android:layout_weight="1"
             android:background="@drawable/bg_round_blue1"
-            android:text="통계 리스트"
+            android:text="정산보고"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -92,7 +92,7 @@
             android:layout_height="match_parent"
             android:background="#BED6BF"
             android:gravity="center"
-            android:text="라 벨"
+            android:text=""
             android:textSize="25sp"
             android:textStyle="bold" />
 
